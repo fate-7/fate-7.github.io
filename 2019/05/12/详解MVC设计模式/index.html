@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="设计模式,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="设计模式 - MVCMVC介绍M 代表 模型（Model）V 代表 视图（View）C 代表 控制器（controller)   众所周知MVC不是设计模式，是一个比设计模式更大一点的模式，称作设计模式不合理，应该说MVC它是一种软件开发架构模式，它包含了很多的设计模式，最为密切是以下三种：Observer (观察者模式), Composite（组合模式）和Strategy（策略模式）。所以说MV">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解MVC设计模式">
+<meta property="og:url" content="http://yoursite.com/2019/05/12/详解MVC设计模式/index.html">
+<meta property="og:site_name" content="Fate7">
+<meta property="og:description" content="设计模式 - MVCMVC介绍M 代表 模型（Model）V 代表 视图（View）C 代表 控制器（controller)   众所周知MVC不是设计模式，是一个比设计模式更大一点的模式，称作设计模式不合理，应该说MVC它是一种软件开发架构模式，它包含了很多的设计模式，最为密切是以下三种：Observer (观察者模式), Composite（组合模式）和Strategy（策略模式）。所以说MV">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/详解MVC设计模式/9D20AA38BEA2E251C32AB76B3A2A5EFA.jpg">
+<meta property="og:updated_time" content="2019-05-12T06:56:14.610Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="详解MVC设计模式">
+<meta name="twitter:description" content="设计模式 - MVCMVC介绍M 代表 模型（Model）V 代表 视图（View）C 代表 控制器（controller)   众所周知MVC不是设计模式，是一个比设计模式更大一点的模式，称作设计模式不合理，应该说MVC它是一种软件开发架构模式，它包含了很多的设计模式，最为密切是以下三种：Observer (观察者模式), Composite（组合模式）和Strategy（策略模式）。所以说MV">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/12/详解MVC设计模式/9D20AA38BEA2E251C32AB76B3A2A5EFA.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/12/详解MVC设计模式/">
+
+
+
+
+
+  <title>详解MVC设计模式 | Fate7</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fate7</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/详解MVC设计模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="1872的城南">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fate7">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">详解MVC设计模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T11:37:26+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="设计模式-MVC"><a href="#设计模式-MVC" class="headerlink" title="设计模式 - MVC"></a>设计模式 - MVC</h2><h3 id="MVC介绍"><a href="#MVC介绍" class="headerlink" title="MVC介绍"></a>MVC介绍</h3><p>M 代表 模型（Model）<br>V 代表 视图（View）<br>C 代表 控制器（controller) </p>
+<p><img src="/2019/05/12/详解MVC设计模式/9D20AA38BEA2E251C32AB76B3A2A5EFA.jpg" alt></p>
+<p>众所周知MVC不是设计模式，是一个比设计模式更大一点的模式，称作设计模式不合理，应该说MVC它是一种软件开发架构模式，它包含了很多的设计模式，最为密切是以下三种：Observer (观察者模式), Composite（组合模式）和Strategy（策略模式）。所以说MVC模式又称复合模式。MVC(Model-View-Controller) 模式的基本思想是数据，显示和处理相分离。模型(Model)负责数据管理，视图(View)负责数据显示，控制器(Controller)负责业务逻辑和响应策略。</p>
+<p>从MVC的形成过程来看，最初只有模型和视图两个元素。模型封装了数据并提供操作接口，视图用来表现数据和接收用户请求。模型是独立的，而视图依赖于模型：从模型获取数据进行显示；向模型发送用户请求，并根据返回结果刷新自己。</p>
+<p>需要用多个视图表现同一模型时，情况发生了变化：一个视图修改数据以后，不但本身要刷新，其他所有视图也要刷新。如果由该视图通知其他视图，它就需要知道其他所有视图，由于每个视图都可能发出修改，每个视图都要知道其他所有视图，这种关联过于复杂，不但难以维护，而且不便于增加新的视图。如果让模型通知所有视图更新，可能会影响模型的独立性。用观察者(Observer)模式 可以解决上述矛盾，从而实现：由模型通知视图，而模型不依赖于具体的视图，具体视图之间相互独立。</p>
+<p>视图是用户请求的接收者，但不宜作为请求的处理者。因为界面是易变的，如果业务代码和界面代码放在一起，频繁的界面修改可能会破坏比较稳定的业务代码。将业务逻辑分离出来，由一个控制器负责，就是为了避免这种干扰。</p>
+<p>模型在状态变化的时候，直接通知所有视图，视图向模型查询状态数据，然后刷新自身。当用户发出操作时，视图把消息发给控制器，控制器按照业务逻辑进行处理，需要查询或更新数据时，控制器会调用模型。</p>
+<p>MVC架构把数据处理，程序输入输出控制及数据显示分离开来，并且描述了不同部件的对象间的通信方式。使得软件可维护性，可扩展性，灵活性以及封装性大大提高；MVC(Model-View-Controller)把系统的组成分解为M（模型）、 V（视图）、C（控制器）三种部件。视图表示数据在屏幕上的显示。控制器提供处理过程控制，它在模型和视图之间起连接作用。控制器本身不输出任何信息和做任何处理，它只负责把用户的请求转成针对Model的操作，和调用相应的视图来显示Model处理后的数据。</p>
+<p>同样的数据，可以有不同的显示和进行各种处理。显示仅仅是表现数据，而处理是根据用户请求改变数据的过程，不但包含业务逻辑，也要提供响应策略。响应策略由控制器负责，视图可以使用不同的控制器提供不同的响应方式，这是策略(Strategy)模式的应用。</p>
+<p>此外，MVC还允许视图嵌套，通过使用组合(Composite)模式，一致地处理组合视图和普通视图。</p>
+<p>用多个视图表现一个模型，在视图不变的情况下改变响应策略，允许视图嵌套，这是MVC的三个主要特性。在内部结构上，MVC的主要关系是由观察者模式，策略模式和组合模式给出的。由观察者模式确定的模型视图关系是其中最为重要的。</p>
+<p>MVC 模式有许多变体。前述结构中，由模型通知视图刷新，称为主动MVC；如果由控制器更新模型以后通知视图，称为被动MVC结构。在许多应用中，没有明显的控制器角色，也没有视图嵌套。可见根据实际需要，构成MVC的三个模式上都可能出现变化。Web浏览器就是被动MVC结构的一个实例。</p>
+<p>“ 浏览器是一个交互程序，从概念上讲，它是由一组客户、一组解释器与一个管理它们的控制器所组成。控制器形成了浏览器的中心部件，它解释鼠标点击与键盘输入，并且调用其他组件来执行用户指定的操作。例如，当用户键入一个URL或者点击一个超文本引用时，控制器调用一个客户从所需文档所在的远程服务器上取回该文档，并且调用解释器向用户显示该文档。每个浏览器必须包含一个HTML解释器来显示文档，其他解释器是可选的。HTML解释器的输入由符合HTML语法的文档所组成，输出由位于用户显示器上的格式版本文档所组成。解释器通过将HTML规则转换成适合用户显示硬件的命令来处理版面细节。HTML解释器一个最重要的功能是包含可选项。解释器必须存储关于显示器上位置之间关系的信息和HTML文档中被瞄定的项。当用户用鼠标选定了一个项，浏览器通过当前的光标位置和存储的位置信息来决定哪个项被用户选定。”</p>
+<h3 id="为什么要在Web应用中使用MVC架构"><a href="#为什么要在Web应用中使用MVC架构" class="headerlink" title="为什么要在Web应用中使用MVC架构"></a>为什么要在Web应用中使用MVC架构</h3><p>用户界面逻辑的更改往往比业务逻辑频繁，尤其是在基于Web的应用程序中。例如，可能添加新的用户界面页，或者可能完全打乱现有的页面布局。对显示的更改，尽可能地不要影响到数据和业务逻辑。</p>
+<p>目前大部分Web应用都是将数据代码和表示混在一起。经验比较丰富的开发者会将数据从表示层分离开来，但这通常不是很容易做到的，它需要精心的计划和不断的尝试。MVC从根本上强制性的将它们分开。尽管构造MVC应用需要一些额外的工作，但它带来的好处是无庸质疑的</p>
+<h4 id="提高代码重用率"><a href="#提高代码重用率" class="headerlink" title="提高代码重用率"></a>提高代码重用率</h4><p>最重要的一点是多个视图能共享一个模型，无论用户想要Flash界面或是 WAP 界面；用一个模型就能处理它们。由于已经将数据和业务规则从表示层分开，所以可以最大化的重用代码。</p>
+<h4 id="提高程序的可维护性"><a href="#提高程序的可维护性" class="headerlink" title="提高程序的可维护性"></a>提高程序的可维护性</h4><p>因为模型是自包含的，并且与控制器和视图相分离，所以很容易改变数据层和业务规则 [3]。例如，把数据库从MySQL移植到Oracle，或者把基于RDBMS数据源改变到LDAP，只需改变模型即可。一旦正确的实现了模型，不管数据来自哪里，视图都会正确的显示它们。MVC架构的运用，使得程序的三个部件相互对立，大大提高了程序的可维护性。</p>
+<h4 id="有利于团队开发"><a href="#有利于团队开发" class="headerlink" title="有利于团队开发"></a>有利于团队开发</h4><p>在开发过程中，可以更好的分工，更好的协作。有利于开发出高质量的软件。良好的项 目架构设计，将减少编码工作量 ：采用MVC结构 + 代码生成器，是大多数Web应用的理想选择。部分模型(Model)、和存储过程一般可用工具自动生成。控制(Controller)器比较稳定，一般由于架构师（也可能是有经验的人）完成；那么整个项目需要手动编写代码的地方就只有视图(View)了。在这种模式下，个人能力不在特别重要，只要懂点语法基础的人都可以编写，无论项目成员写出什么样的代码，都在项目管理者的可控范围内。即使项目中途换人，也不会有太大问题。在个人能力参差不齐的团队开发中，采用MVC开发是非常理想的。</p>
+<h3 id="MVC架构的优点及不足"><a href="#MVC架构的优点及不足" class="headerlink" title="MVC架构的优点及不足"></a>MVC架构的优点及不足</h3><h4 id="MVC的优点"><a href="#MVC的优点" class="headerlink" title="MVC的优点"></a>MVC的优点</h4><p>MVC的优点体现在以下几个方面：</p>
+<p>（1） 有利于团队开发分工协作和质量控制，降低开发成本。</p>
+<p>（2） 可以为一个模型在运行时同时建立和使用多个视图。变化-传播机制可以确保所有相关的视图及时得到模型数据变化，从而使所有关联的视图和控制器做到行为同步。</p>
+<p>（3） 视图与控制器的可接插性，允许更换视图和控制器对象，而且可以根据需求动态的打开或关闭、甚至在运行期间进行对象替换。</p>
+<p>（4） 模型的可移植性。因为模型是独立于视图的，所以可以把一个模型独立地移植到新的平台工作。需要做的只是在新平台上对视图和控制器进行新的修改。</p>
+<p>（5） 潜在的框架结构。可以基于此模型建立应用程序框架，不仅仅是用在设计界面的设计中。</p>
+<h4 id="MVC的缺点"><a href="#MVC的缺点" class="headerlink" title="MVC的缺点"></a>MVC的缺点</h4><p>MVC的不足体现在以下几个方面：</p>
+<p>（1）增加了系统结构和实现的复杂性。对于简单的界面，严格遵循MVC，使模型、视图与控制器分离，会增加结构的复杂性，并可能产生过多的更新操作，降低运行效率。</p>
+<p>（2）视图对模型数据的访问效率低。视图可能需要多次调用Model才能获得足够的显示数据。</p>
+<p>（3）完全理解MVC并不是很容易。使用MVC需要精心的计划，由于它的内部原理比较复杂，所以需要花费一些时间去思考。同时由于模型和视图要严格的分离，这样也给调试应用程序到来了一定的困难。</p>
+<h3 id="MVC-模式可以分解为以下设计模式"><a href="#MVC-模式可以分解为以下设计模式" class="headerlink" title="MVC 模式可以分解为以下设计模式"></a>MVC 模式可以分解为以下设计模式</h3><p>在GOF书的 Introduction中，有一小节是”Design Patterns in Smalltalk MVC”即介绍在MVC模式里用到的设计模式。它大概向我们传达了这样的信息：合成模式+策略模式+观察者模式约等于MVC模式（当然MVC模式要多一些东西）。也就是说它在大部分情况下是下面几个模式：</p>
+<p>(1)、观察者模式</p>
+<p>(2)、合成模式</p>
+<p>(3)、策略模式</p>
+<h3 id="谈谈MVC-架构模式中的三个角色"><a href="#谈谈MVC-架构模式中的三个角色" class="headerlink" title="谈谈MVC 架构模式中的三个角色"></a>谈谈MVC 架构模式中的三个角色</h3><ul>
+<li>Model （模型端）</li>
+</ul>
+<p>Mod封装的是数据源和所有基于对这些数据的操作。在一个组件中，Model往往表示组件的状态和操作这些状态的方法，往往是一系列的公开方法。通过这些公开方法，便可以取得模型端的所有功能。</p>
+<p>在这些公开方法中，有些是取值方法，让系统其他部分可以得到模型端的内部状态参数，其他的改值方法则允许外部修改模型端的内部状态。模型端还必须有方法登记视图，以便在模型端的内部状态发生变化时，可以通知视图端。我们可以自己定义一个Subject接口来提供登记和通知视图所需的接口或者继承 Java.util.Observable类，让父类完成这件事。</p>
+<ul>
+<li>多个 View( 视图端 )</li>
+</ul>
+<p>View封装的是对数据源Model的一种显示。一个模型可以由多个视图，并且可以在需要的时候动态地登记上所需的视图。而一个视图理论上也可以同不同的模型关联起来。</p>
+<p>在前言里提到了，MVC模式用到了合成模式，这是因为在视图端里，视图可以嵌套，比如说在一个JFrame组件里面，可以有菜单组件，很多按钮组件等。</p>
+<ul>
+<li>多个 Controller( 控制器端 )</li>
+</ul>
+<p>封装的是外界作用于模型的操作。通常，这些操作会转发到模型上，并调用模型中相应的一个或者多个方法（这个方法就是前面在介绍模型的时候说的改值方法）。一般Controller在Model和View之间起到了沟通的作用，处理用户在View上的输入，并转发给Model来更改其状态值。这样 Model和View两者之间可以做到松散耦合，甚至可以彼此不知道对方，而由Controller连接起这两个部分。也在前言里提到，MVC用到了策略模式，这是因为View用一个特定的Controller的实例来实现一个特定的响应策略，更换不同的Controller，可以改变View对用户输入的响应。</p>
+<p>MVC (Model-View-Controller) : 模型利用”观察者”让控制器和视图可以随最新的状态改变而更新。另一方面，视图和控制器则实现了”策略模式”。控制器是视图的行为; 视图内部使用”组合模”式来管理显示组件。</p>
+<p>以下的MVC解释图很好的标示了这种模式：</p>
+<ul>
+<li>模型使用观察者模式，以便观察者更新，同时保持两者之间的解耦。</li>
+<li>控制器是视图的策略，视图可以使用不同的控制器实现，得到不同的行为。</li>
+<li>视图使用组合模式实现用户界面，用户界面通常组合了嵌套的组件，像面板、框架和按钮。</li>
+<li>这些模式携手合作，把MVC模式的三层解耦，这样可以保持设计干净又有弹性。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+
+    
+
+    
+
+    
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+
+    
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"><i class="fa fa-tag"></i> 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/12/IntelliJ IDEA For Mac 快捷键/" rel="next" title="IntelliJ IDEA for Mac 快捷键">
+                <i class="fa fa-chevron-left"></i> IntelliJ IDEA for Mac 快捷键
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/12/Anaconda的使用/" rel="prev" title="Anaconda的使用">
+                Anaconda的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="1872的城南">
+            
+              <p class="site-author-name" itemprop="name">1872的城南</p>
+              <p class="site-description motion-element" itemprop="description">我要开始写博客了哦！！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式-MVC"><span class="nav-number">1.</span> <span class="nav-text">设计模式 - MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MVC介绍"><span class="nav-number">1.1.</span> <span class="nav-text">MVC介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要在Web应用中使用MVC架构"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要在Web应用中使用MVC架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#提高代码重用率"><span class="nav-number">1.2.1.</span> <span class="nav-text">提高代码重用率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提高程序的可维护性"><span class="nav-number">1.2.2.</span> <span class="nav-text">提高程序的可维护性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有利于团队开发"><span class="nav-number">1.2.3.</span> <span class="nav-text">有利于团队开发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVC架构的优点及不足"><span class="nav-number">1.3.</span> <span class="nav-text">MVC架构的优点及不足</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVC的优点"><span class="nav-number">1.3.1.</span> <span class="nav-text">MVC的优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MVC的缺点"><span class="nav-number">1.3.2.</span> <span class="nav-text">MVC的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVC-模式可以分解为以下设计模式"><span class="nav-number">1.4.</span> <span class="nav-text">MVC 模式可以分解为以下设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谈谈MVC-架构模式中的三个角色"><span class="nav-number">1.5.</span> <span class="nav-text">谈谈MVC 架构模式中的三个角色</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">1872的城南</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">52.9k</span>
+  
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+<!--    -->
+
+</body>
+</html>

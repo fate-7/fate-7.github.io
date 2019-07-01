@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JAVA,Mybatis,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Mybatis介绍MyBatis本是apache的一个开源项目iBatis,2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。 MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行封装，使开发者只需要关注 SQL本身，而不需要花费精力去处理例如注册驱动、创建c">
+<meta name="keywords" content="JAVA,Mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习Mybatis - day1">
+<meta property="og:url" content="http://yoursite.com/2019/05/12/学习Mybatis-day1/index.html">
+<meta property="og:site_name" content="Fate7">
+<meta property="og:description" content="Mybatis介绍MyBatis本是apache的一个开源项目iBatis,2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。 MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行封装，使开发者只需要关注 SQL本身，而不需要花费精力去处理例如注册驱动、创建c">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/学习Mybatis-day1/F01B8D5CB37F60D95B2BF85AA3D0FDCF.jpg">
+<meta property="og:updated_time" content="2019-05-13T01:25:29.200Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习Mybatis - day1">
+<meta name="twitter:description" content="Mybatis介绍MyBatis本是apache的一个开源项目iBatis,2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。 MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行封装，使开发者只需要关注 SQL本身，而不需要花费精力去处理例如注册驱动、创建c">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/12/学习Mybatis-day1/F01B8D5CB37F60D95B2BF85AA3D0FDCF.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/12/学习Mybatis-day1/">
+
+
+
+
+
+  <title>学习Mybatis - day1 | Fate7</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fate7</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/学习Mybatis-day1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="1872的城南">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fate7">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习Mybatis - day1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T18:46:39+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  7.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  33
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Mybatis介绍"><a href="#Mybatis介绍" class="headerlink" title="Mybatis介绍"></a>Mybatis介绍</h3><p>MyBatis本是<em>apache</em>的一个开源项目<em>iBatis</em>,2010年这个项目由apache software foundation 迁移到了<em>google code</em>，并且改名为<strong><em>MyBatis</em></strong> 。2013年11月迁移到Github。</p>
+<p>MyBatis是一个优秀的<strong>持久层框架</strong>，它对jdbc的操作数据库的过程进行封装，使开发者<strong>只需要关注 SQL本身</strong>，而不需要花费精力去处理例如注册驱动、创建connection、创建statement、手动设置参数、结果集检索等jdbc繁杂的过程代码。</p>
+<p>Mybatis通过xml或注解的方式将要执行的各种statement（statement、preparedStatemnt、CallableStatement）配置起来，并通过java对象和statement中的sql进行映射生成最终执行的sql语句，最后由mybatis框架执行sql并将结果映射成java对象并返回。</p>
+<h3 id="Mybatis架构"><a href="#Mybatis架构" class="headerlink" title="Mybatis架构"></a>Mybatis架构</h3><p><img src="/2019/05/12/学习Mybatis-day1/F01B8D5CB37F60D95B2BF85AA3D0FDCF.jpg" alt="Mybatis架构图解"></p>
+<p>1、 mybatis配置<br>SqlMapConfig.xml，此文件作为mybatis的全局配置文件，配置了mybatis的运行环境等信息。<br>mapper.xml文件即sql映射文件，文件中配置了操作数据库的sql语句。此文件需要在SqlMapConfig.xml中加载。</p>
+<p>2、 通过mybatis环境等配置信息构造SqlSessionFactory即会话工厂</p>
+<p>3、 由会话工厂创建sqlSession即会话，操作数据库需要通过sqlSession进行。</p>
+<p>4、 mybatis底层自定义了Executor执行器接口操作数据库，Executor接口有两个实现，一个是基本执行器、一个是缓存执行器。</p>
+<p>5、 Mapped Statement也是mybatis一个底层封装对象，它包装了mybatis配置信息及sql映射信息等。mapper.xml文件中一个sql对应一个Mapped Statement对象，sql的id即是Mapped statement的id。</p>
+<p>6、 Mapped Statement对sql执行输入参数进行定义，包括HashMap、基本类型、pojo，Executor通过Mapped Statement在执行sql前将输入的java对象映射至sql中，输入参数映射就是jdbc编程中对preparedStatement设置参数。</p>
+<p>7、 Mapped Statement对sql执行输出结果进行定义，包括HashMap、基本类型、pojo，Executor通过Mapped Statement在执行sql后将输出结果映射至java对象中，输出结果映射过程相当于jdbc编程中对结果的解析处理过程。</p>
+<h3 id="JDBC的缺点"><a href="#JDBC的缺点" class="headerlink" title="JDBC的缺点"></a>JDBC的缺点</h3><h4 id="JDBC编程步骤"><a href="#JDBC编程步骤" class="headerlink" title="JDBC编程步骤"></a>JDBC编程步骤</h4><p>1、 加载数据库驱动<br>2、 创建并获取数据库链接<br>3、 创建jdbc statement对象<br>4、 设置sql语句<br>5、 设置sql语句中的参数(使用preparedStatement)<br>6、 通过statement执行sql并获取结果<br>7、 对sql执行结果进行解析处理<br>8、 释放资源(resultSet、preparedstatement、connection)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//JDBC程序</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Connection connection = <span class="keyword">null</span>;</span><br><span class="line">    PreparedStatement preparedStatement = <span class="keyword">null</span>;</span><br><span class="line">    ResultSet resultSet = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">       <span class="comment">// 加载数据库驱动</span></span><br><span class="line">       Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">       </span><br><span class="line">       <span class="comment">// 通过驱动管理类获取数据库链接</span></span><br><span class="line">       connection = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8"</span>, <span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 定义sql语句 ?表示占位符</span></span><br><span class="line">       String sql = <span class="string">"select * from user where username = ?"</span>;</span><br><span class="line">       </span><br><span class="line">       <span class="comment">// 获取预处理statement</span></span><br><span class="line">       preparedStatement = connection.prepareStatement(sql);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 设置参数，第一个参数为sql语句中参数的序号（从1开始），第二个参数为设置的参数值</span></span><br><span class="line">       preparedStatement.setString(<span class="number">1</span>, <span class="string">"王五"</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 向数据库发出sql执行查询，查询出结果集</span></span><br><span class="line">       resultSet = preparedStatement.executeQuery();</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 遍历查询结果集</span></span><br><span class="line">       <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">           System.out.println(resultSet.getString(<span class="string">"id"</span>) + <span class="string">"  "</span> + resultSet.getString(<span class="string">"username"</span>));</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">       e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">       <span class="comment">// 释放资源</span></span><br><span class="line">       <span class="keyword">if</span> (resultSet != <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">              resultSet.close();</span><br><span class="line">           &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (preparedStatement != <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">              preparedStatement.close();</span><br><span class="line">           &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">             e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (connection != <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">              connection.close();</span><br><span class="line">           &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="JDBC问题"><a href="#JDBC问题" class="headerlink" title="JDBC问题"></a>JDBC问题</h4><p>1、 数据库连接创建、释放频繁造成系统资源浪费，从而影响系统性能。如果使用数据库连接池可解决此问题。</p>
+<p>2、 Sql语句在代码中硬编码，造成代码不易维护，实际应用中sql变化的可能较大，sql变动需要改变java代码。</p>
+<p>3、 使用preparedStatement向占有位符号传参数存在硬编码，因为sql语句的where条件不一定，可能多也可能少，修改sql还要修改代码，系统不易维护。</p>
+<p>4、 对结果集解析存在硬编码（查询列名），sql变化导致解析代码变化，系统不易维护，如果能将数据库记录封装成pojo对象解析比较方便。</p>
+<h4 id="Mybatis-解决JDBC缺点"><a href="#Mybatis-解决JDBC缺点" class="headerlink" title="Mybatis 解决JDBC缺点"></a>Mybatis 解决JDBC缺点</h4><p>1、 数据库连接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库连接池可解决此问题。<br>解决：在SqlMapConfig.xml中配置数据连接池，使用连接池管理数据库链接。</p>
+<p>2、 Sql语句写在代码中造成代码不易维护，实际应用sql变化的可能较大，sql变动需要改变java代码。<br>解决：将Sql语句配置在XXXXmapper.xml文件中与java代码分离。</p>
+<p>3、 向sql语句传参数麻烦，因为sql语句的where条件不一定，可能多也可能少，占位符需要和参数一一对应。<br>解决：Mybatis自动将java对象映射至sql语句，通过statement中的parameterType定义输入参数的类型。</p>
+<p>4、 对结果集解析麻烦，sql变化导致解析代码变化，且解析前需要遍历，如果能将数据库记录封装成pojo对象解析比较方便。<br>解决：Mybatis自动将sql执行结果映射至java对象，通过statement中的resultType定义输出结果的类型。</p>
+<h3 id="mybatis与hibernate不同"><a href="#mybatis与hibernate不同" class="headerlink" title="mybatis与hibernate不同"></a>mybatis与hibernate不同</h3><p>Mybatis和hibernate不同，它不完全是一个ORM框架，因为MyBatis需要程序员自己编写Sql语句。mybatis可以通过XML或注解方式灵活配置要运行的sql语句，并将java对象和sql语句映射生成最终执行的sql，最后将sql执行的结果再映射生成java对象。</p>
+<p>Mybatis学习门槛低，简单易学，程序员直接编写原生态sql，可严格控制sql执行性能，灵活度高，非常适合对关系数据模型要求不高的软件开发，例如互联网软件、企业运营类软件等，因为这类软件需求变化频繁，一但需求变化要求成果输出迅速。但是灵活的前提是mybatis无法做到数据库无关性，如果需要实现支持多种数据库的软件则需要自定义多套sql映射文件，工作量大。</p>
+<p>Hibernate对象/关系映射能力强，数据库无关性好，对于关系模型要求高的软件（例如需求固定的定制化软件）如果用hibernate开发可以节省很多代码，提高效率。但是Hibernate的学习门槛高，要精通门槛更高，而且怎么设计O/R映射，在性能和对象模型之间如何权衡，以及怎样用好Hibernate需要具有很强的经验和能力才行。</p>
+<p>总之，按照用户的需求在有限的资源环境下只要能做出维护性、扩展性良好的软件架构都是好架构，所以框架只有适合才是最好。</p>
+<h3 id="入门程序"><a href="#入门程序" class="headerlink" title="入门程序"></a>入门程序</h3><h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>1. 创建Java工程<br>2. 导入Jar包（核心，依赖，数据库）<br>3. 加入配置文件<br> a. 创建资源文件夹（Source Folder） config<br> b. 加入log4j.properties (默认使用log4j作为输出日志）<br> c. SqlMapConfig.xml (核心配置文件）<br>4. 创建pojo<br> ps：用于sql映射，pojo类通常与数据库表对应<br>5. sql映射文件<br> ps：config/sqlmp下创建<br>6. 加载映射文件</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//name: SqlMapConfig.xml</span></span><br><span class="line"><span class="comment">//path: config/SqlMapConfig.xml</span></span><br><span class="line"></span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">PUBLIC <span class="string">"-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- 和spring整合后 environments配置将废除 --&gt;</span><br><span class="line">	&lt;environments <span class="keyword">default</span>=<span class="string">"development"</span>&gt;</span><br><span class="line">		&lt;environment id=<span class="string">"development"</span>&gt;</span><br><span class="line">			&lt;!-- 使用jdbc事务管理 --&gt;</span><br><span class="line">			&lt;transactionManager type=<span class="string">"JDBC"</span> /&gt;</span><br><span class="line">			&lt;!-- 数据库连接池 --&gt;</span><br><span class="line">			&lt;dataSource type=<span class="string">"POOLED"</span>&gt;</span><br><span class="line">				&lt;property name=<span class="string">"driver"</span> value=<span class="string">"com.mysql.cj.jdbc.Driver"</span> /&gt;</span><br><span class="line">				&lt;property name=<span class="string">"url"</span></span><br><span class="line">					value=<span class="string">"jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;amp;serverTimezone=UTC"</span> /&gt;</span><br><span class="line">				&lt;property name=<span class="string">"username"</span> value=<span class="string">"root"</span> /&gt;</span><br><span class="line">				&lt;property name=<span class="string">"password"</span> value=<span class="string">"as980702"</span> /&gt;</span><br><span class="line">			&lt;/dataSource&gt;</span><br><span class="line">		&lt;/environment&gt;</span><br><span class="line">	&lt;/environments&gt;</span><br><span class="line"></span><br><span class="line">	&lt;mappers&gt;</span><br><span class="line">		&lt;mapper resource=<span class="string">"sqlmap/User.xml"</span> /&gt;</span><br><span class="line">	&lt;/mappers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//name: log4j.properties</span></span><br><span class="line"><span class="comment">//path: congig/log4j.properties</span></span><br><span class="line"></span><br><span class="line"># Global logging configuration</span><br><span class="line">log4j.rootLogger=DEBUG, stdout</span><br><span class="line"># Console output...</span><br><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=%<span class="number">5</span>p [%t] - %m%n</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//name: User.java</span></span><br><span class="line"><span class="comment">//path: src/ccut/rj/pojo/User.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> ccut.rj.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">	<span class="keyword">private</span> Integer id;</span><br><span class="line">	<span class="keyword">private</span> String username;<span class="comment">// 用户姓名</span></span><br><span class="line">	<span class="keyword">private</span> String sex;<span class="comment">// 性别</span></span><br><span class="line">	<span class="keyword">private</span> Date birthday;<span class="comment">// 生日</span></span><br><span class="line">	<span class="keyword">private</span> String address;<span class="comment">// 地址</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> username;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.username = username;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSex</span><span class="params">(String sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> birthday;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(Date birthday)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getAddress</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> address;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAddress</span><span class="params">(String address)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.address = address;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"User [id="</span> + id + <span class="string">", username="</span> + username + <span class="string">", sex="</span> + sex + <span class="string">", birthday="</span> + birthday + <span class="string">", address="</span></span><br><span class="line">				+ address + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//name: User.xml</span></span><br><span class="line"><span class="comment">//path: config/sqlmap/User.xml</span></span><br><span class="line"></span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">PUBLIC <span class="string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span><br><span class="line">&lt;mapper namespace=<span class="string">"test"</span>&gt;</span><br><span class="line">  &lt;!-- id:statement的id 或者叫做sql的id--&gt;</span><br><span class="line">	&lt;!-- parameterType:声明输入参数的类型 --&gt;</span><br><span class="line">	&lt;!-- resultType:声明输出结果的类型，应该填写pojo的全路径 --&gt;</span><br><span class="line">	&lt;!-- #&#123;&#125;：输入参数的占位符，相当于jdbc的？ --&gt;</span><br><span class="line">	&lt;select id=<span class="string">"queryUserById"</span> parameterType=<span class="string">"int"</span> resultType=<span class="string">"ccut.rj.pojo.User"</span>&gt;</span><br><span class="line">		SELECT * FROM `user` WHERE id  = #&#123;id&#125;</span><br><span class="line">	&lt;/select&gt;</span><br><span class="line"></span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h4><p>测试程序步骤：<br> 1. 创建SqlSessionFactoryBuilder对象<br> 2. 加载SqlMapConfig.xml配置文件<br> 3. 创建SqlSessionFactory对象<br> 4. 创建SqlSession对象<br> 5. 执行SqlSession对象执行查询，获取结果User<br> 6. 打印结果<br> 7. 释放资源</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//name: MybatisTest.java</span></span><br><span class="line"><span class="comment">//name: src/ccut/rj/junit/MybatisTest.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> SqlSessionFactory sqlSessionFactory = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 1. 创建SqlSessionFactoryBuilder对象</span></span><br><span class="line">       SqlSessionFactoryBuilder sqlSessionFactoryBuilder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 2. 加载SqlMapConfig.xml配置文件</span></span><br><span class="line">       InputStream inputStream = Resources.getResourceAsStream(<span class="string">"SqlMapConfig.xml"</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 3. 创建SqlSessionFactory对象</span></span><br><span class="line">       <span class="keyword">this</span>.sqlSessionFactory = sqlSessionFactoryBuilder.build(inputStream);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryUserById</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 4. 创建SqlSession对象</span></span><br><span class="line">       SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 5. 执行SqlSession对象执行查询，获取结果User</span></span><br><span class="line">       <span class="comment">// 第一个参数是User.xml的statement的id，第二个参数是执行sql需要的参数；</span></span><br><span class="line">       Object user = sqlSession.selectOne(<span class="string">"queryUserById"</span>, <span class="number">1</span>);</span><br><span class="line">       </span><br><span class="line">       <span class="comment">// 6. 打印结果</span></span><br><span class="line">       System.out.println(user);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 7. 释放资源</span></span><br><span class="line">       sqlSession.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="和"><a href="#和" class="headerlink" title="#{}和${}"></a>#{}和${}</h4><p><a href>#{}</a>表示一个占位符号，<a href>通过</a><a href>#{}</a>可以实现preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换。#{}可以有效防止sql注入。<a href> #{}</a><a href>可以接收简单类型值或pojo</a>属性值。 如果parameterType传输单个简单类型值，#{}括号中可以是value或其它名称。</p>
+<p> ${}表示拼接sql串，<a href>通过</a>${}可以将parameterType 传入的内容拼接在sql中且不进行jdbc类型转换， <a href>${}</a>可以接收简单类型值或pojo属性值，如果parameterType传输单个简单类型值，${}括号中只能是value。</p>
+<h4 id="parameterType和resultType"><a href="#parameterType和resultType" class="headerlink" title="parameterType和resultType"></a>parameterType和resultType</h4><p>parameterType：指定输入参数类型，mybatis通过ognl从输入对象中获取参数值拼接在sql中。</p>
+<p>resultType：指定输出结果类型，mybatis将sql查询结果的一行记录数据映射为resultType指定类型的对象。如果有多条数据，则分别进行映射，并把对象放到容器List中</p>
+<h4 id="selectOne和selectList"><a href="#selectOne和selectList" class="headerlink" title="selectOne和selectList"></a>selectOne和selectList</h4><p>selectOne查询一条记录，如果使用selectOne查询多条记录则抛出异常：</p>
+<p>org.apache.ibatis.exceptions.TooManyResultsException: Expected one result (or null) to be returned by selectOne(), but found: 3</p>
+<p> at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:70)</p>
+<p>selectList可以查询一条或多条记录。</p>
+<p>####SqlSessionFactoryBuilder</p>
+<p><a href>SqlSessionFactoryBuilder</a>用于创建<a href>SqlSessionFacoty</a>，<a href>SqlSessionFacoty</a>一旦创建完成就不需要SqlSessionFactoryBuilder了，因为SqlSession是通过SqlSessionFactory创建的。所以可以将SqlSessionFactoryBuilder当成一个工具类使用，最佳使用范围是方法范围即方法体内局部变量。</p>
+<h4 id="SqlSessionFactory"><a href="#SqlSessionFactory" class="headerlink" title="SqlSessionFactory"></a>SqlSessionFactory</h4><p>SqlSessionFactory是一个接口，接口中定义了openSession的不同重载方法，SqlSessionFactory的最佳使用范围是整个应用运行期间，一旦创建后可以重复使用，通常以单例模式管理SqlSessionFactory。</p>
+<h4 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h4><p>SqlSession是一个面向用户的接口，sqlSession中定义了数据库操作方法。</p>
+<p>每个线程都应该有它自己的SqlSession实例。SqlSession的实例不能共享使用，它也是线程不安全的。因此最佳的范围是请求或方法范围。绝对不能将SqlSession实例的引用放在一个类的静态字段或实例字段中。</p>
+<p>打开一个 SqlSession；使用完毕就要关闭它。通常把这个关闭操作放到 finally 块中以确保每次都能执行关闭。如下：</p>
+<p>SqlSession session = sqlSessionFactory.openSession();<br> try{<br> // do work<br> } finally {<br> session.close();<br> }</p>
+<p>SqlSession中封装了对数据库的操作，如：查询、插入、更新、删除等。<br>SqlSession通过SqlSessionFactory创建。<br>SqlSessionFactory是通过SqlSessionFactoryBuilder进行创建。</p>
+<h3 id="原始Dao开发"><a href="#原始Dao开发" class="headerlink" title="原始Dao开发"></a>原始Dao开发</h3><h4 id="开发实例"><a href="#开发实例" class="headerlink" title="开发实例"></a>开发实例</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">User.xml 添加</span><br><span class="line">&lt;!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 --&gt;</span><br><span class="line">&lt;mapper namespace=<span class="string">"test"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 根据id查询用户 --&gt;</span><br><span class="line">    &lt;select id=<span class="string">"queryUserById"</span> parameterType=<span class="string">"int"</span></span><br><span class="line">       resultType=<span class="string">"ccut.rj.pojo.User"</span>&gt;</span><br><span class="line">       select * from user where id = #&#123;id&#125;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Dao接口</span></span><br><span class="line"><span class="comment">//name: UserDao.java</span></span><br><span class="line"><span class="comment">//path: src/ccut/rj/dao/UserDao.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> </span>&#123;</span><br><span class="line">    <span class="function">User <span class="title">queryUserById</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Dao实现类</span></span><br><span class="line"><span class="comment">//name: UserDaoImp.java</span></span><br><span class="line"><span class="comment">//path: src/ccut/rj/dao/UserDaoImp.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title">UserDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> SqlSessionFactory sqlSessionFactory;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserDaoImpl</span><span class="params">(SqlSessionFactory sqlSessionFactory)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">super</span>();</span><br><span class="line">       <span class="keyword">this</span>.sqlSessionFactory = sqlSessionFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">queryUserById</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 创建SqlSession</span></span><br><span class="line">       SqlSession sqlSession = <span class="keyword">this</span>.sqlSessionFactory.openSession();</span><br><span class="line">       <span class="comment">// 执行查询逻辑</span></span><br><span class="line">       User user = sqlSession.selectOne(<span class="string">"queryUserById"</span>, id);</span><br><span class="line">       <span class="comment">// 释放资源</span></span><br><span class="line">       sqlSession.close();</span><br><span class="line">       <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Dao测试类</span></span><br><span class="line"><span class="comment">//name: UserDaoTest.java</span></span><br><span class="line"><span class="comment">//path: src/ccut/rj/junit/UsrDaoTest.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> SqlSessionFactory sqlSessionFactory;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 创建SqlSessionFactoryBuilder</span></span><br><span class="line">       SqlSessionFactoryBuilder sqlSessionFactoryBuilder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 加载SqlMapConfig.xml配置文件</span></span><br><span class="line">       InputStream inputStream = Resources.getResourceAsStream(<span class="string">"SqlMapConfig.xml"</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 创建SqlsessionFactory</span></span><br><span class="line">       <span class="keyword">this</span>.sqlSessionFactory = sqlSessionFactoryBuilder.build(inputStream);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryUserById</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 创建DAO</span></span><br><span class="line">       UserDao userDao = <span class="keyword">new</span> UserDaoImpl(<span class="keyword">this</span>.sqlSessionFactory);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 执行查询</span></span><br><span class="line">       User user = userDao.queryUserById(<span class="number">1</span>);</span><br><span class="line">       System.out.println(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>原始Dao开发中存在以下问题：</p>
+<p>u Dao方法体存在重复代码：通过SqlSessionFactory创建<a href>SqlSession</a>，调用SqlSession的数据库操作方法</p>
+<p>u 调用sqlSession的数据库操作方法需要指定statement的id，这里存在硬编码，不得于开发维护。</p>
+<h3 id="Mapper动态代理开发"><a href="#Mapper动态代理开发" class="headerlink" title="Mapper动态代理开发"></a>Mapper动态代理开发</h3><h4 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h4><p>Mapper接口开发方法只需要程序员编写Mapper接口（相当于Dao接口），由Mybatis框架根据接口定义创建接口的动态代理对象，代理对象的方法体同上边Dao接口实现类方法。</p>
+<p>Mapper接口开发需要遵循以下规范：</p>
+<p>1、 Mapper.xml文件中的namespace与mapper接口的类路径相同。</p>
+<p>2、 Mapper接口方法名和Mapper.xml中定义的每个statement的id相同 </p>
+<p>3、 Mapper接口方法的输入参数类型和mapper.xml中定义的每个sql 的parameterType的类型相同</p>
+<p>4、 Mapper接口方法的输出参数类型和mapper.xml中定义的每个sql的resultType的类型相同</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//name：UserMapper.xml</span></span><br><span class="line"><span class="comment">//path: config/mapper/UserMapper.xml</span></span><br><span class="line"></span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">PUBLIC <span class="string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span><br><span class="line">&lt;!-- namespace：命名空间，用于隔离sql --&gt;</span><br><span class="line">&lt;!-- 还有一个很重要的作用，使用动态代理开发DAO，<span class="number">1</span>. namespace必须和Mapper接口类路径一致 --&gt;</span><br><span class="line">&lt;mapper namespace=<span class="string">"ccut.rj.mapper.UserMapper"</span>&gt;</span><br><span class="line">	&lt;!-- 根据用户id查询用户 --&gt;</span><br><span class="line">	&lt;!-- <span class="number">2</span>. id必须和Mapper接口方法名一致 --&gt;</span><br><span class="line">	&lt;!-- <span class="number">3</span>. parameterType必须和接口方法参数类型一致 --&gt;</span><br><span class="line">	&lt;!-- <span class="number">4</span>. resultType必须和接口方法返回值类型一致 --&gt;</span><br><span class="line">	&lt;select id=<span class="string">"queryUserById"</span> parameterType=<span class="string">"int"</span></span><br><span class="line">		resultType=<span class="string">"ccut.rj.pojo.User"</span>&gt;</span><br><span class="line">		select * from user where id = #&#123;id&#125;</span><br><span class="line">	&lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//name: UsrMapper</span></span><br><span class="line"><span class="comment">//path: src/ccut/rj/mapper/UserMapper.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">User <span class="title">queryUserById</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注册到 SqlMapConfig.xml</span></span><br><span class="line">&lt;!-- 加载映射文件 --&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">       &lt;mapper resource=<span class="string">"sqlmap/User.xml"</span> /&gt;</span><br><span class="line">       &lt;mapper resource=<span class="string">"mapper/UserMapper.xml"</span> /&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//测试代码</span></span><br><span class="line"><span class="comment">//name:  UserMapperTest.java</span></span><br><span class="line"><span class="comment">//path:  src/ccut/rj/junit/UserMapperTest.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserMapperTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> SqlSessionFactory sqlSessionFactory;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Before</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">// 创建SqlSessionFactoryBuilder</span></span><br><span class="line">		SqlSessionFactoryBuilder sqlSessionFactoryBuilder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">		<span class="comment">// 加载SqlMapConfig.xml配置文件</span></span><br><span class="line">		InputStream inputStream = Resources.getResourceAsStream(<span class="string">"SqlMapConfig.xml"</span>);</span><br><span class="line">		<span class="comment">// 创建SqlsessionFactory</span></span><br><span class="line">		<span class="keyword">this</span>.sqlSessionFactory = sqlSessionFactoryBuilder.build(inputStream);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryUserById</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 获取sqlSession，和spring整合后由spring管理</span></span><br><span class="line">		SqlSession sqlSession = <span class="keyword">this</span>.sqlSessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 从sqlSession中获取Mapper接口的代理对象</span></span><br><span class="line">		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">		<span class="comment">// 执行查询方法</span></span><br><span class="line">		User user = userMapper.queryUserById(<span class="number">1</span>);</span><br><span class="line">		System.out.println(user);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 和spring整合后由spring管理</span></span><br><span class="line">		sqlSession.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="selectOne和selectList-1"><a href="#selectOne和selectList-1" class="headerlink" title="selectOne和selectList"></a>selectOne和selectList</h4><p>动态代理对象调用sqlSession.selectOne()和sqlSession.selectList()是根据mapper接口方法的返回值决定，如果返回list则调用selectList方法，如果返回单个对象则调用selectOne方法。</p>
+<h4 id="namespace"><a href="#namespace" class="headerlink" title="namespace"></a>namespace</h4><p>mybatis官方推荐使用mapper代理方法开发mapper接口，程序员不用编写mapper接口实现类，使用mapper代理方法时，输入参数可以使用pojo包装对象或map对象，保证dao的通用性。</p>
+<h3 id="SqlMapConfig-xml"><a href="#SqlMapConfig-xml" class="headerlink" title="SqlMapConfig.xml"></a>SqlMapConfig.xml</h3><h4 id="配置内容"><a href="#配置内容" class="headerlink" title="配置内容"></a>配置内容</h4><p>SqlMapConfig.xml中配置的内容和顺序如下：</p>
+<p>properties（属性）<br>typeAliases（类型别名）<br>typeHandlers（类型处理器）<br>objectFactory（对象工厂）<br>plugins（插件）<br>environments（环境集合属性对象）<br>environment（环境子属性对象）<br>transactionManager（事务管理）<br>dataSource（数据源）<br>mappers（映射器）</p>
+<h4 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">properties</span><br><span class="line"></span><br><span class="line">db.properties配置文件内容如下：</span><br><span class="line"></span><br><span class="line">jdbc.driver=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.url=jdbc:mysql:<span class="comment">//localhost:3306/mybatis?characterEncoding=utf-8</span></span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=root</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 是用resource属性加载外部配置文件 --&gt;</span><br><span class="line">    &lt;properties resource=<span class="string">"db.properties"</span>&gt;</span><br><span class="line">       &lt;!-- 在properties内部用property定义属性 --&gt;</span><br><span class="line">       &lt;!-- 如果外部配置文件有该属性，则内部定义属性被外部属性覆盖 --&gt;</span><br><span class="line">       &lt;property name=<span class="string">"jdbc.username"</span> value=<span class="string">"root123"</span> /&gt;</span><br><span class="line">       &lt;property name=<span class="string">"jdbc.password"</span> value=<span class="string">"root123"</span> /&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="typeAliases"><a href="#typeAliases" class="headerlink" title="typeAliases"></a>typeAliases</h4><p>1. 支持别名 2. 自定义别名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;typeAliases&gt;</span><br><span class="line">       &lt;!-- 单个别名定义 --&gt;</span><br><span class="line">       &lt;typeAlias alias=<span class="string">"user"</span> type=<span class="string">"ccut.rj.pojo.User"</span> /&gt;</span><br><span class="line">       </span><br><span class="line">       &lt;!-- 批量别名定义，扫描整个包下的类，别名为类名（大小写不敏感） --&gt;</span><br><span class="line">       &lt;<span class="keyword">package</span> name=<span class="string">"ccut.rj.pojo"</span> /&gt;</span><br><span class="line">       &lt;<span class="keyword">package</span> name=<span class="string">"其它包"</span> /&gt;</span><br><span class="line">&lt;/typeAliases&gt;</span><br><span class="line">&lt;!-- 在mapper.xml配置文件中，就可以使用设置的别名了 别名大小写不敏感 --&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="mappers（映射器）"><a href="#mappers（映射器）" class="headerlink" title="mappers（映射器）"></a>mappers（映射器）</h4><p>Mapper配置的几种方法：<br>1. \&lt;mapper resource=” “ /><br>使用相对于类路径的资源（现在的使用方式）</p>
+<p>如：\&lt;mapper resource=”sqlmap/User.xml” /></p>
+<p>2. \&lt;mapper class=” “ /><br>使用mapper接口类路径</p>
+<p>如：\&lt;mapper class=”cn.itcast.mybatis.mapper.UserMapper”/></p>
+<p>注意：此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中。</p>
+<p>3. \&lt;package name=””/><br>注册指定包下的所有mapper接口</p>
+<p>如：\&lt;package name=”cn.itcast.mybatis.mapper”/><br>注意：此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中。</p>
+<h3 id="输入映射和输出映射"><a href="#输入映射和输出映射" class="headerlink" title="输入映射和输出映射"></a>输入映射和输出映射</h3><h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><ol>
+<li>拷贝项目</li>
+<li>SqlMapConfig.xml配置文件。Mapper映射器只保留包扫描的方式</li>
+</ol>
+<h4 id="输入类型-parameterType"><a href="#输入类型-parameterType" class="headerlink" title="输入类型 parameterType"></a>输入类型 parameterType</h4><ol>
+<li>简单类型<br>使用#{}占位符，或者${}进行sql拼接</li>
+<li>pojo对象<br>Mybatis使用ognl表达式解析对象字段的值，#{}或者${}括号中的值为pojo属性名称。</li>
+<li>pojo包装对象<br>开发中通过可以使用pojo传递查询条件。查询条件可能是综合的查询条件，不仅包括用户查询条件还包括其它的查询条件（比如查询用户信息的时候，将用户购买商品信息也作为查询条件），这时可以使用包装对象传递输入参数。包装对象：Pojo类中的一个属性是另一个pojo。</li>
+</ol>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><ol>
+<li>编写包装类</li>
+<li>sql语句</li>
+<li>Mapper.xml文件 tips: #{}或者${}括号中的值为被包装pojo的属性名称，比如${user.username}</li>
+<li>Mapper接口</li>
+<li>测试</li>
+<li>效果</li>
+</ol>
+<h4 id="输出类型"><a href="#输出类型" class="headerlink" title="输出类型"></a>输出类型</h4><p>resultType</p>
+<ol>
+<li>简单类型</li>
+<li>pojo对象</li>
+<li>pojo列表 写pojo类型就OK</li>
+</ol>
+<p>resultMap<br>例子：如代码块所示</p>
+<p>对比：<br>resultType可以指定将查询结果映射为pojo，但需要pojo的属性名和sql查询的列名一致方可映射成功。如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系，resultMap实质上还需要将查询结果映射到pojo对象中。resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- resultMap最终还是要将结果映射到pojo上，type就是指定映射到哪一个pojo --&gt;</span><br><span class="line">&lt;!-- id：设置ResultMap的id --&gt;</span><br><span class="line"></span><br><span class="line">&lt;resultMap type=<span class="string">"order"</span> id=<span class="string">"orderResultMap"</span>&gt;</span><br><span class="line">  &lt;!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id --&gt;</span><br><span class="line">  &lt;!-- property：主键在pojo中的属性名 --&gt;</span><br><span class="line">  &lt;!-- column：主键在数据库中的列名 --&gt;</span><br><span class="line">  &lt;id property=<span class="string">"id"</span> column=<span class="string">"id"</span> /&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- 定义普通属性 --&gt;</span><br><span class="line">  &lt;result property=<span class="string">"userId"</span> column=<span class="string">"user_id"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"number"</span> column=<span class="string">"number"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"createtime"</span> column=<span class="string">"createtime"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"note"</span> column=<span class="string">"note"</span> /&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 查询所有的订单数据 --&gt;</span><br><span class="line">&lt;select id=<span class="string">"queryOrderAll"</span> resultMap=<span class="string">"orderResultMap"</span>&gt;</span><br><span class="line">  SELECT id, user_id,</span><br><span class="line">  number,</span><br><span class="line">  createtime, note FROM orders</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h3><h4 id="if"><a href="#if" class="headerlink" title="if"></a>if</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//if标签</span></span><br><span class="line">&lt;!-- 根据条件查询用户 --&gt;</span><br><span class="line">&lt;select id=<span class="string">"queryUserByWhere"</span> parameterType=<span class="string">"user"</span> resultType=<span class="string">"user"</span>&gt;</span><br><span class="line">	SELECT id, username, birthday, sex, address FROM `user`</span><br><span class="line">	WHERE <span class="number">1</span>=<span class="number">1</span></span><br><span class="line">	&lt;<span class="keyword">if</span> test=<span class="string">"sex != null and sex != ''"</span>&gt;</span><br><span class="line">		AND sex = #&#123;sex&#125;</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;<span class="keyword">if</span> test=<span class="string">"username != null and username != ''"</span>&gt;</span><br><span class="line">		AND username LIKE</span><br><span class="line">		<span class="string">'%$&#123;username&#125;%'</span></span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//注意字符串类型的数据需要做不等于空字符串校验</span></span><br></pre></td></tr></table></figure>
+<h4 id="where"><a href="#where" class="headerlink" title="where"></a>where</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//where标签</span></span><br><span class="line">&lt;!-- 根据条件查询用户 --&gt;</span><br><span class="line">&lt;select id=<span class="string">"queryUserByWhere"</span> parameterType=<span class="string">"user"</span> resultType=<span class="string">"user"</span>&gt;</span><br><span class="line">	SELECT id, username, birthday, sex, address FROM `user`</span><br><span class="line">&lt;!-- where标签可以自动添加where，同时处理sql语句中第一个and关键字 --&gt;</span><br><span class="line">	&lt;where&gt;</span><br><span class="line">		&lt;<span class="keyword">if</span> test=<span class="string">"sex != null"</span>&gt;</span><br><span class="line">			AND sex = #&#123;sex&#125;</span><br><span class="line">		&lt;/if&gt;</span><br><span class="line">		&lt;<span class="keyword">if</span> test=<span class="string">"username != null and username != ''"</span>&gt;</span><br><span class="line">			AND username LIKE</span><br><span class="line">			<span class="string">'%$&#123;username&#125;%'</span></span><br><span class="line">		&lt;/if&gt;</span><br><span class="line">	&lt;/where&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="choose-when"><a href="#choose-when" class="headerlink" title="choose - when"></a>choose - when</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//choose  实现ifelse功能</span></span><br><span class="line">&lt;select id=<span class="string">"listProduct"</span> resultType=<span class="string">"Product"</span>&gt;</span><br><span class="line">	  SELECT * FROM product_ </span><br><span class="line">	  &lt;where&gt;</span><br><span class="line">	  	&lt;choose&gt;</span><br><span class="line">		  &lt;when test=<span class="string">"name != null"</span>&gt;</span><br><span class="line">		    <span class="function">and name like <span class="title">concat</span><span class="params">(<span class="string">'%'</span>,#&#123;name&#125;,<span class="string">'%'</span>)</span></span></span><br><span class="line"><span class="function">		  &lt;/when&gt;			  </span></span><br><span class="line"><span class="function">		  &lt;when test</span>=<span class="string">"price !=null and price != 0"</span>&gt;</span><br><span class="line">		    and price &gt; #&#123;price&#125;</span><br><span class="line">		  &lt;/when&gt;			  		</span><br><span class="line">	  	  &lt;otherwise&gt;</span><br><span class="line">	  	  	and id &gt;<span class="number">1</span></span><br><span class="line">	  	  &lt;/otherwise&gt;</span><br><span class="line">	  	&lt;/choose&gt;</span><br><span class="line">	  &lt;/where&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//foreach标签</span></span><br><span class="line">&lt;!-- foreach标签，进行遍历 --&gt;</span><br><span class="line">&lt;!-- collection：遍历的集合，这里是QueryVo的ids属性 --&gt;</span><br><span class="line">&lt;!-- item：遍历的项目，可以随便写，，但是和后面的#&#123;&#125;里面要一致 --&gt;</span><br><span class="line">&lt;!-- open：在前面添加的sql片段 --&gt;</span><br><span class="line">&lt;!-- close：在结尾处添加的sql片段 --&gt;</span><br><span class="line">&lt;!-- separator：指定遍历的元素之间使用的分隔符 --&gt;</span><br><span class="line"></span><br><span class="line">&lt;foreach collection=<span class="string">"ids"</span> item=<span class="string">"item"</span> open=<span class="string">"id IN ("</span> close=<span class="string">")"</span> separator=<span class="string">","</span>&gt;</span><br><span class="line">		#&#123;item&#125;</span><br><span class="line">&lt;/foreach&gt;</span><br></pre></td></tr></table></figure>
+<p>foreach标签用于数组遍历 collection=”array”</p>
+<p>foreach标签用于列表遍历 collection=”list”</p>
+<h4 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//bind标签就像是再做一次字符串拼接，方便后续使用</span></span><br><span class="line"></span><br><span class="line">&lt;select id=<span class="string">"listProduct"</span> resultType=<span class="string">"Product"</span>&gt;</span><br><span class="line">  &lt;bind name=<span class="string">"likename"</span> value=<span class="string">"'%' + name + '%'"</span> /&gt;</span><br><span class="line">  select * from   product_  where name like #&#123;likename&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="sql片段"><a href="#sql片段" class="headerlink" title="sql片段"></a>sql片段</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//sql片段</span></span><br><span class="line">&lt;!-- 声明sql片段 --&gt;</span><br><span class="line">&lt;sql id=<span class="string">"userFields"</span>&gt;</span><br><span class="line">	id, username, birthday, sex, address</span><br><span class="line">&lt;/sql&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 使用include标签加载sql片段；refid是sql片段id --&gt;</span><br><span class="line">	SELECT &lt;include refid=<span class="string">"userFields"</span> /&gt; FROM `user</span><br></pre></td></tr></table></figure>
+<h3 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h3><h4 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h4><p>一. 使用resultType<br>    使用resultType，创建新的pojo类，此pojo类中包括了订单信息和用户信息这样返回对象的时候，mybatis自动把用户信息也注入进来了<br>    定义专门的pojo类作为输出类型，其中定义了sql查询结果集所有的字段。此方法较为简单，企业中使用普遍。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 创建新的pojo类 </span></span><br><span class="line"><span class="keyword">package</span> ccut.rj.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderUser</span> <span class="keyword">extends</span> <span class="title">Orders</span> </span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * </span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">  <span class="keyword">private</span> String username;</span><br><span class="line">  <span class="keyword">private</span> String address;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"OrderUser [username="</span> + username + <span class="string">", address="</span> + address + <span class="string">"]"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. mapper.xml</span></span><br><span class="line">&lt;!-- 查询订单，同时包含用户数据 --&gt;</span><br><span class="line">&lt;select id=<span class="string">"queryOrderUser"</span> resultType=<span class="string">"orderUser"</span>&gt;</span><br><span class="line">  SELECT</span><br><span class="line">  o.id,</span><br><span class="line">  o.user_id</span><br><span class="line">  userId,</span><br><span class="line">  o.number,</span><br><span class="line">  o.createtime,</span><br><span class="line">  o.note,</span><br><span class="line">  u.username,</span><br><span class="line">  u.address</span><br><span class="line">  FROM</span><br><span class="line">  `order` o</span><br><span class="line">  LEFT JOIN `user` u ON o.user_id = u.id</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3. mapper接口</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;OrderUser&gt; <span class="title">queryOrderUser</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4. 单元测试</span></span><br><span class="line">List&lt;OrderUser&gt; list = userMapper.queryOrderUser();</span><br></pre></td></tr></table></figure>
+<p>二. 使用resultMap</p>
+<p> 使用resultMap，定义专门的resultMap用于映射一对一查询结果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 改造orders的pojo</span></span><br><span class="line"><span class="comment">// 附加对象 用户对象</span></span><br><span class="line"><span class="keyword">private</span> User user;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. mapper.xml</span></span><br><span class="line">resultMap type=<span class="string">"orders"</span> id=<span class="string">"orderUserResultMap"</span>&gt;</span><br><span class="line">  &lt;id property=<span class="string">"id"</span> column=<span class="string">"id"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"userId"</span> column=<span class="string">"user_id"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"number"</span> column=<span class="string">"number"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"createtime"</span> column=<span class="string">"createtime"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"note"</span> column=<span class="string">"note"</span> /&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- association ：配置一对一属性 --&gt;</span><br><span class="line">  &lt;!-- property:order里面的User属性名 --&gt;</span><br><span class="line">  &lt;!-- javaType:属性类型 --&gt;</span><br><span class="line">  &lt;association property=<span class="string">"user"</span> javaType=<span class="string">"user"</span>&gt;</span><br><span class="line">    &lt;!-- id:声明主键，表示user_id是关联查询对象的唯一标识--&gt;</span><br><span class="line">    &lt;id property=<span class="string">"id"</span> column=<span class="string">"user_id"</span> /&gt;</span><br><span class="line">    &lt;result property=<span class="string">"username"</span> column=<span class="string">"username"</span> /&gt;</span><br><span class="line">    &lt;result property=<span class="string">"address"</span> column=<span class="string">"address"</span> /&gt;</span><br><span class="line">  &lt;/association&gt;</span><br><span class="line"></span><br><span class="line">&lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 一对一关联，查询订单，订单内部包含用户属性 --&gt;</span><br><span class="line">&lt;select id=<span class="string">"queryOrderUserResultMap"</span> resultMap=<span class="string">"orderUserResultMap"</span>&gt;</span><br><span class="line">  SELECT</span><br><span class="line">  o.id,</span><br><span class="line">  o.user_id,</span><br><span class="line">  o.number,</span><br><span class="line">  o.createtime,</span><br><span class="line">  o.note,</span><br><span class="line">  u.username,</span><br><span class="line">  u.address</span><br><span class="line">  FROM</span><br><span class="line">  `order` o</span><br><span class="line">  LEFT JOIN `user` u ON o.user_id = u.id</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3. mapper接口</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Orders&gt; <span class="title">queryOrderUserResultMap</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4. 单元测试</span></span><br><span class="line">List&lt;Orders&gt; list =  userMapper.queryOrderUserResultMap();</span><br></pre></td></tr></table></figure>
+<h4 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h4><ol>
+<li><p>一端的pojo设置一个多端的pojo的列表</p>
+</li>
+<li><p>一端的xml映射文件中的resultMap中的collection设置多端的键值</p>
+</li>
+</ol>
+<p>resultMap</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 修改pojo  User</span></span><br><span class="line"><span class="keyword">private</span> List&lt;Orders&gt; orders;   <span class="comment">//订单列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2. mapper.xml</span></span><br><span class="line">&lt;resultMap type=<span class="string">"user"</span> id=<span class="string">"userOrderResultMap"</span>&gt;</span><br><span class="line">  &lt;id property=<span class="string">"id"</span> column=<span class="string">"id"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"username"</span> column=<span class="string">"username"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"birthday"</span> column=<span class="string">"birthday"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"sex"</span> column=<span class="string">"sex"</span> /&gt;</span><br><span class="line">  &lt;result property=<span class="string">"address"</span> column=<span class="string">"address"</span> /&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- 配置一对多的关系 --&gt;</span><br><span class="line">  &lt;collection property=<span class="string">"orders"</span> javaType=<span class="string">"list"</span> ofType=<span class="string">"order"</span>&gt;</span><br><span class="line">    &lt;!-- 配置主键，是关联Order的唯一标识 --&gt;</span><br><span class="line">    &lt;id property=<span class="string">"id"</span> column=<span class="string">"oid"</span> /&gt;</span><br><span class="line">    &lt;result property=<span class="string">"number"</span> column=<span class="string">"number"</span> /&gt;</span><br><span class="line">    &lt;result property=<span class="string">"createtime"</span> column=<span class="string">"createtime"</span> /&gt;</span><br><span class="line">    &lt;result property=<span class="string">"note"</span> column=<span class="string">"note"</span> /&gt;</span><br><span class="line">  &lt;/collection&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 一对多关联，查询订单同时查询该用户下的订单 --&gt;</span><br><span class="line">&lt;select id=<span class="string">"queryUserOrder"</span> resultMap=<span class="string">"userOrderResultMap"</span>&gt;</span><br><span class="line">  SELECT</span><br><span class="line">  u.id,</span><br><span class="line">  u.username,</span><br><span class="line">  u.birthday,</span><br><span class="line">  u.sex,</span><br><span class="line">  u.address,</span><br><span class="line">  o.id oid,</span><br><span class="line">  o.number,</span><br><span class="line">  o.createtime,</span><br><span class="line">  o.note</span><br><span class="line">  FROM</span><br><span class="line">  `user` u</span><br><span class="line">  LEFT JOIN `order` o ON u.id = o.user_id</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3. mapper接口</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">queryUserOrder</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4. 测试</span></span><br><span class="line">List&lt;User&gt; list = userMapper.queryUserOrder();</span><br></pre></td></tr></table></figure>
+<h4 id="多对一"><a href="#多对一" class="headerlink" title="多对一"></a>多对一</h4><ol>
+<li><p>多端的pojo中设置一个一端的pojo对象</p>
+</li>
+<li><p>多端的xml映射文件中的resultMap进行字段和属性的对应。使用association 进行多对一关系关联，指定表字段名称与对象属性名称的一一对应关系</p>
+</li>
+</ol>
+<h4 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h4><ol>
+<li>为了维系多对多关系，必须要一个中间表。</li>
+<li>中间表的pojo中设置两个多端的pojo对象。</li>
+<li>两个多端的xml映射文件一个设置为多对一的形式，一个为resultMap - collection - association的形式</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;resultMap type=<span class="string">"Order"</span> id=<span class="string">"orderBean"</span>&gt;</span><br><span class="line">	&lt;id column=<span class="string">"oid"</span> property=<span class="string">"id"</span> /&gt;</span><br><span class="line">	&lt;result column=<span class="string">"code"</span> property=<span class="string">"code"</span> /&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;collection property=<span class="string">"orderItems"</span> ofType=<span class="string">"OrderItem"</span>&gt;</span><br><span class="line">		&lt;id column=<span class="string">"oiid"</span> property=<span class="string">"id"</span> /&gt;</span><br><span class="line">		&lt;result column=<span class="string">"number"</span> property=<span class="string">"number"</span> /&gt;</span><br><span class="line">		&lt;association property=<span class="string">"product"</span> javaType=<span class="string">"Product"</span>&gt;</span><br><span class="line">			&lt;id column=<span class="string">"pid"</span> property=<span class="string">"id"</span>/&gt;</span><br><span class="line">			&lt;result column=<span class="string">"pname"</span> property=<span class="string">"name"</span>/&gt;</span><br><span class="line">			&lt;result column=<span class="string">"price"</span> property=<span class="string">"price"</span>/&gt;</span><br><span class="line">		&lt;/association&gt;				</span><br><span class="line">	&lt;/collection&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//联合order_, order_item_, product_ 三张表进行查询</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//查询结果 id和code字段放在Order对象里， 然后通过一对多的&lt;collectio&gt;标签把oiid和number放在OrderItem对象里，最后把pid,pname,price放进Product对象里。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//删除关系，就是删除掉中间表的记录。</span></span><br><span class="line"><span class="comment">//多对多不存在修改关系的做法，就是删除旧的，然后新增一条即达到修改的效果。</span></span><br></pre></td></tr></table></figure>
+<h3 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h3><h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><p>1. 导入log4j的jar包<br>2. 新建log4j.properties</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//log4j.properties</span></span><br><span class="line"># Global logging configuration</span><br><span class="line">log4j.rootLogger=ERROR, stdout</span><br><span class="line"># MyBatis logging configuration...</span><br><span class="line">log4j.logger.com.how2java=TRACE</span><br><span class="line"># Console output...</span><br><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=%<span class="number">5</span>p [%t] - %m%n</span><br></pre></td></tr></table></figure>
+<h4 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h4><p>1. JDBC方式 - environment下的\&lt;transactionManager type=”JDBC”/> </p>
+<p>2. MYSQL 表的类型必须是INNODB</p>
+<h4 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h4><p>在mybatis的配置文件中修改配置<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;settings\&gt; </span><br><span class="line">	&lt;!-- 打开延迟加载的开关 --&gt; </span><br><span class="line">	&lt;setting name=<span class="string">"lazyLoadingEnabled"</span> value=<span class="string">"true"</span> /&gt; </span><br><span class="line">	&lt;!-- 将积极加载改为消息加载即按需加载 --&gt; </span><br><span class="line">	&lt;setting name=<span class="string">"aggressiveLazyLoading"</span> value=<span class="string">"false"</span>/&gt; </span><br><span class="line">&lt;/settings\&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><p>SQL中的limit</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. xml方式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//XML文件</span></span><br><span class="line">&lt;select id=<span class="string">"listByPage"</span> resultType=<span class="string">"Category"</span>&gt;</span><br><span class="line">  select * from   category_</span><br><span class="line">  &lt;<span class="keyword">if</span> test=<span class="string">"start!=null and count!=null"</span>&gt;</span><br><span class="line">    limit #&#123;start&#125;,#&#123;count&#125;</span><br><span class="line">  &lt;/if&gt;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Category&gt; <span class="title">listByPage</span><span class="params">(@Param(<span class="string">"start"</span>)</span> <span class="keyword">int</span> start, @<span class="title">Param</span><span class="params">(<span class="string">"count"</span>)</span><span class="keyword">int</span> count)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试</span></span><br><span class="line">List&lt;Category&gt;  cs =mapper.listByPage(<span class="number">0</span>, <span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2. 注解方式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//接口</span></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">" select * from category_ limit #&#123;start&#125;,#&#123;count&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Category&gt; <span class="title">listByPage</span><span class="params">(@Param(<span class="string">"start"</span>)</span> <span class="keyword">int</span> start, @<span class="title">Param</span><span class="params">(<span class="string">"count"</span>)</span><span class="keyword">int</span> count)</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="PageHelper"><a href="#PageHelper" class="headerlink" title="PageHelper"></a>PageHelper</h4><p>PageHelper是一款犀利的Mybatis分页插件 <a href="https://github.com/pagehelper/Mybatis-PageHelper" target="_blank" rel="noopener">https://github.com/pagehelper/Mybatis-PageHelper</a></p>
+<ol>
+<li>导入jar包</li>
+<li>修改mybatis的配置xml文件</li>
+<li>查询前加入PageHelper.offsetPage(0, 5);</li>
+<li>查总数PageInfo pageInfo = new PageInfo\&lt;>(list);</li>
+</ol>
+<p>配置文件加入<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">	&lt;plugin interceptor=<span class="string">"com.github.pagehelper.PageInterceptor"</span>&gt;</span><br><span class="line">	&lt;/plugin&gt;</span><br><span class="line">&lt;/plugins&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="一级缓存（默认）"><a href="#一级缓存（默认）" class="headerlink" title="一级缓存（默认）"></a>一级缓存（默认）</h4><p>在session1中查询两次id=1的Category对象。第一次会去数据库中取数据，但是第二次就不会访问数据库了，而是直接从session中取出来。</p>
+<h4 id="二级缓存（需开启）"><a href="#二级缓存（需开启）" class="headerlink" title="二级缓存（需开启）"></a>二级缓存（需开启）</h4><p>Mybatis二级缓存是SessionFactory，如果两次查询基于同一个SessionFactory，那么就从二级缓存中取数据，而不用到数据库里去取了。</p>
+<p>1. mybatis配置文件开启二级缓存：<br><code>&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</code></p>
+<p>2. mapper的xml文件中启动对象的二级缓存：<br><code>&lt;cache/</code>&gt;</p>
+<p>3. 对象需要实现序列化接口Serializable</p>
+<h4 id="查询总数"><a href="#查询总数" class="headerlink" title="查询总数"></a>查询总数</h4><p>@Select(“ select count(*) from category_ “)<br> public int count();</p>
+<h4 id="SQL中关于count的对比"><a href="#SQL中关于count的对比" class="headerlink" title="SQL中关于count的对比"></a>SQL中关于count的对比</h4><h5 id="count-1-and-count"><a href="#count-1-and-count" class="headerlink" title="count(1) and count(*)"></a>count(1) and count(*)</h5><p>当表的数据量大些时，对表作分析之后，使用count(1)还要比使用count(<em>)用时多了！<br> 从执行计划来看，count(1)和count(</em>)的效果是一样的。 但是在表做过分析之后，count(1)会比count(*)的用时少些（1w以内数据量），不过差不了多少。 </p>
+<p> 如果count(1)是聚索引,id,那肯定是count(1)快。但是差的很小的。<br> 因为count(<em>),自动会优化指定到那一个字段。所以没必要去count(1)，用count(</em>)，sql会帮你完成优化的 因此：count(1)和count(*)基本没有差别！ </p>
+<h5 id="count-1-and-count-字段"><a href="#count-1-and-count-字段" class="headerlink" title="count(1) and count(字段)"></a>count(1) and count(字段)</h5><p> 两者的主要区别是<br> （1） count(1) 会统计表中的所有的记录数，包含字段为null 的记录。<br> （2） count(字段) 会统计该字段在表中出现的次数，忽略字段为null 的情况。即不统计字段为null 的记录。 </p>
+<h5 id="count-和-count-1-和count-列名-区别"><a href="#count-和-count-1-和count-列名-区别" class="headerlink" title="count(*) 和 count(1)和count(列名)区别"></a>count(*) 和 count(1)和count(列名)区别</h5><p>执行效果上：<br> count(*)包括了所有的列，相当于行数，在统计结果的时候，不会忽略列值为NULL<br> count(1)包括了忽略所有列，用1代表代码行，在统计结果的时候，不会忽略列值为NULL<br> count(列名)只包括列名那一列，在统计结果的时候，会忽略列值为空（这里的空不是只空字符串或者0，而是表示null）的计数，即某个字段值为NULL时，不统计。</p>
+<p><strong>执行效率上：<br> 列名为主键，count(列名)会比count(1)快<br> 列名不为主键，count(1)会比count(列名)快<br> 如果表多个列并且没有主键，则 count（1） 的执行效率优于 count（*）<br> 如果有主键，则 select count（主键）的执行效率是最优的 </strong><br><strong> 如果表只有一个字段，则 select count（\</strong>）最优。**</p>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p><strong>这篇文章里大多使用的是XMl，day02会有Mybatis中注解的使用方式的介绍</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+
+    
+
+    
+
+    
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+
+    
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVA/" rel="tag"><i class="fa fa-tag"></i> JAVA</a>
+          
+            <a href="/tags/Mybatis/" rel="tag"><i class="fa fa-tag"></i> Mybatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/12/Homebrew-Mac包管理器/" rel="next" title="Homebrew - Mac包管理器">
+                <i class="fa fa-chevron-left"></i> Homebrew - Mac包管理器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/12/我的Mac程序清单/" rel="prev" title="我的Mac程序清单">
+                我的Mac程序清单 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="1872的城南">
+            
+              <p class="site-author-name" itemprop="name">1872的城南</p>
+              <p class="site-description motion-element" itemprop="description">我要开始写博客了哦！！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis介绍"><span class="nav-number">1.</span> <span class="nav-text">Mybatis介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis架构"><span class="nav-number">2.</span> <span class="nav-text">Mybatis架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC的缺点"><span class="nav-number">3.</span> <span class="nav-text">JDBC的缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JDBC编程步骤"><span class="nav-number">3.1.</span> <span class="nav-text">JDBC编程步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JDBC问题"><span class="nav-number">3.2.</span> <span class="nav-text">JDBC问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mybatis-解决JDBC缺点"><span class="nav-number">3.3.</span> <span class="nav-text">Mybatis 解决JDBC缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mybatis与hibernate不同"><span class="nav-number">4.</span> <span class="nav-text">mybatis与hibernate不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#入门程序"><span class="nav-number">5.</span> <span class="nav-text">入门程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境搭建"><span class="nav-number">5.1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试程序"><span class="nav-number">5.2.</span> <span class="nav-text">测试程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#和"><span class="nav-number">5.3.</span> <span class="nav-text">#{}和${}</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parameterType和resultType"><span class="nav-number">5.4.</span> <span class="nav-text">parameterType和resultType</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#selectOne和selectList"><span class="nav-number">5.5.</span> <span class="nav-text">selectOne和selectList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SqlSessionFactory"><span class="nav-number">5.6.</span> <span class="nav-text">SqlSessionFactory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SqlSession"><span class="nav-number">5.7.</span> <span class="nav-text">SqlSession</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原始Dao开发"><span class="nav-number">6.</span> <span class="nav-text">原始Dao开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开发实例"><span class="nav-number">6.1.</span> <span class="nav-text">开发实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题"><span class="nav-number">6.2.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapper动态代理开发"><span class="nav-number">7.</span> <span class="nav-text">Mapper动态代理开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#要求"><span class="nav-number">7.1.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-number">7.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#selectOne和selectList-1"><span class="nav-number">7.3.</span> <span class="nav-text">selectOne和selectList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#namespace"><span class="nav-number">7.4.</span> <span class="nav-text">namespace</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlMapConfig-xml"><span class="nav-number">8.</span> <span class="nav-text">SqlMapConfig.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置内容"><span class="nav-number">8.1.</span> <span class="nav-text">配置内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#properties"><span class="nav-number">8.2.</span> <span class="nav-text">properties</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typeAliases"><span class="nav-number">8.3.</span> <span class="nav-text">typeAliases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mappers（映射器）"><span class="nav-number">8.4.</span> <span class="nav-text">mappers（映射器）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入映射和输出映射"><span class="nav-number">9.</span> <span class="nav-text">输入映射和输出映射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境准备"><span class="nav-number">9.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输入类型-parameterType"><span class="nav-number">9.2.</span> <span class="nav-text">输入类型 parameterType</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-1"><span class="nav-number">9.3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出类型"><span class="nav-number">9.4.</span> <span class="nav-text">输出类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态SQL"><span class="nav-number">10.</span> <span class="nav-text">动态SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if"><span class="nav-number">10.1.</span> <span class="nav-text">if</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where"><span class="nav-number">10.2.</span> <span class="nav-text">where</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#choose-when"><span class="nav-number">10.3.</span> <span class="nav-text">choose - when</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#foreach"><span class="nav-number">10.4.</span> <span class="nav-text">foreach</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">10.5.</span> <span class="nav-text">bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sql片段"><span class="nav-number">10.6.</span> <span class="nav-text">sql片段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联查询"><span class="nav-number">11.</span> <span class="nav-text">关联查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一对一"><span class="nav-number">11.1.</span> <span class="nav-text">一对一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一对多"><span class="nav-number">11.2.</span> <span class="nav-text">一对多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多对一"><span class="nav-number">11.3.</span> <span class="nav-text">多对一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多对多"><span class="nav-number">11.4.</span> <span class="nav-text">多对多</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关概念"><span class="nav-number">12.</span> <span class="nav-text">相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#日志"><span class="nav-number">12.1.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事务管理"><span class="nav-number">12.2.</span> <span class="nav-text">事务管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟加载"><span class="nav-number">12.3.</span> <span class="nav-text">延迟加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分页"><span class="nav-number">12.4.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PageHelper"><span class="nav-number">12.5.</span> <span class="nav-text">PageHelper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一级缓存（默认）"><span class="nav-number">12.6.</span> <span class="nav-text">一级缓存（默认）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二级缓存（需开启）"><span class="nav-number">12.7.</span> <span class="nav-text">二级缓存（需开启）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询总数"><span class="nav-number">12.8.</span> <span class="nav-text">查询总数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL中关于count的对比"><span class="nav-number">12.9.</span> <span class="nav-text">SQL中关于count的对比</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#count-1-and-count"><span class="nav-number">12.9.1.</span> <span class="nav-text">count(1) and count(*)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#count-1-and-count-字段"><span class="nav-number">12.9.2.</span> <span class="nav-text">count(1) and count(字段)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#count-和-count-1-和count-列名-区别"><span class="nav-number">12.9.3.</span> <span class="nav-text">count(*) 和 count(1)和count(列名)区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备注"><span class="nav-number">13.</span> <span class="nav-text">备注</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">1872的城南</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">52.9k</span>
+  
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+<!--    -->
+
+</body>
+</html>
