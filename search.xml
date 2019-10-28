@@ -15,7 +15,7 @@
   <entry>
     <title><![CDATA[Eclipse开启代码补全]]></title>
     <url>%2F2019%2F06%2F04%2FEclipse%E5%BC%80%E5%90%AF%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8%2F</url>
-    <content type="text"><![CDATA[eclipse代码提示Preferences-&gt;Java-&gt;Editor-&gt;content assist 在第二项中的”.”后边追加”abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVW” 如图： 变量自动提示（关键）Preferences-&gt;Java-&gt;Editor-&gt;content assist-&gt;Advnced 将需要的提示类型全部勾选 如图： 只开启这个选项也可以，通过option + / 实现提示。 取消“=”等号和空格自动输入开启第一步的增强提示后，必须键入Esc才不会自动补全你的变量，如果你键入的是空格或者“=”，那么变量名就会被自动补全。 解决方法：https://blog.csdn.net/m0_37468234/article/details/80249241]]></content>
+    <content type="text"><![CDATA[eclipse代码提示Preferences-&gt;Java-&gt;Editor-&gt;content assist 在第二项中的”.”后边追加”abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVW” 如图： 变量自动提示（关键）Preferences-&gt;Java-&gt;Editor-&gt;content assist-&gt;Advnced 将需要的提示类型全部勾选 如图： 只开启这个选项也可以，通过option + / 实现提示。 取消“=”等号和空格自动输入开启第一步的增强提示后，必须键入Esc才不会自动补全你的变量，如果你键入的是空格或者“=”，那么变量名就会被自动补全。 新版本解决方案 Preferences -&gt; Java -&gt; Editor -&gt; Content Assist 勾选Disable insertion triggers except ‘Enter’选项，即只有按enter键时才触发自动补全功能。]]></content>
       <categories>
         <category>工具使用</category>
       </categories>
@@ -100,9 +100,9 @@
       <tags>
         <tag>JAVA</tag>
         <tag>Mybatis</tag>
-        <tag>框架整合</tag>
         <tag>Spring</tag>
         <tag>SpringMVC</tag>
+        <tag>框架整合</tag>
       </tags>
   </entry>
   <entry>
@@ -403,9 +403,9 @@
       <tags>
         <tag>JAVA</tag>
         <tag>Mybatis</tag>
-        <tag>框架整合</tag>
         <tag>Spring</tag>
         <tag>SpringMVC</tag>
+        <tag>框架整合</tag>
       </tags>
   </entry>
 </search>
